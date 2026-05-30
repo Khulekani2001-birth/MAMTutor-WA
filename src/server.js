@@ -1,5 +1,5 @@
 /**
- * EduBot Eswatini — WhatsApp AI Tutor
+ * MAMTutor — WhatsApp AI Tutor
  * Stack: Node.js + Express + Twilio + OpenAI
  */
 
@@ -36,7 +36,7 @@ app.post("/webhook", async (req, res) => {
       const detected = detectGrade(msgBody);
       if (!detected) {
         twiml.message(
-          `Welcome to EduBot! 🎓\n` +
+          `Welcome to MAMTutor! 🎓\n` +
           `Ngena / Enter your grade:\n\n` +
           `📚 *Primary*: Grade 1, 2, 3, 4, 5, 6, or 7\n` +
           `🏫 *High School*: Form 1, 2, 3, 4, or 5\n\n` +
@@ -103,7 +103,7 @@ app.post("/webhook", async (req, res) => {
     }
 
   } catch (err) {
-    console.error("EduBot error:", err);
+    console.error("MAMTutor error:", err);
     twiml.message(
       "Sorry, I ran into a problem. Please try again in a moment. 🙏\n" +
       "Uxolo, kukhona inkinga. Zama futsi."
@@ -114,7 +114,7 @@ app.post("/webhook", async (req, res) => {
 });
 
 // ─── Health check ─────────────────────────────────────────────────────────────
-app.get("/health", (_req, res) => res.json({ status: "ok", service: "EduBot Eswatini" }));
+app.get("/health", (_req, res) => res.json({ status: "ok", service: "MAMTutor" }));
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function detectGrade(text) {
@@ -156,7 +156,7 @@ function splitMessage(text, maxLen) {
 
 function menuText(gradeLabel) {
   return (
-    `📚 *EduBot Menu* — ${gradeLabel}\n\n` +
+    `📚 *MAMTutor Menu* — ${gradeLabel}\n\n` +
     `• Ask any question to get help\n` +
     `• Type *"reset"* to change your grade\n` +
     `• Type *"help"* for tips on asking questions\n` +
@@ -178,4 +178,4 @@ function helpText() {
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ EduBot running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ MAMTutor running on port ${PORT}`));
