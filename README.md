@@ -1,6 +1,6 @@
-# 🎓 EduBot Eswatini — WhatsApp AI Tutor
+# 🎓 MAMTutor — WhatsApp AI Tutor
 
-A WhatsApp chatbot that tutors Eswatini students (Grades 1–7 and Forms 1–5) using Claude AI, in both English and SiSwati.
+A WhatsApp chatbot that tutors Eswatini students (Grades 1–7 and Forms 1–5) using OpenAI, in both English and SiSwati.
 
 ---
 
@@ -13,8 +13,7 @@ Student's WhatsApp
   Twilio API  ◄──── webhook POST ────►  Your Server (Node.js/Express)
                                                │
                                                ▼
-                                        Anthropic Claude API
-                                      (claude-sonnet-4-20250514)
+                                         OpenAI API (gpt-4o-mini)
 ```
 
 ---
@@ -28,23 +27,22 @@ Student's WhatsApp
 4. You'll get a **sandbox number** (e.g. +1 415 523 8886)
 5. Note your **Account SID** and **Auth Token** from the Console dashboard
 
-### Step 2 — Get an Anthropic API Key
-1. Go to [https://console.anthropic.com](https://console.anthropic.com)
+### Step 2 — Get an OpenAI API Key
+1. Go to [https://platform.openai.com](https://platform.openai.com)
 2. Sign up / log in
 3. Go to **API Keys** and create a new key
-4. Save it — you won't see it again!
 
 ### Step 3 — Deploy the Server
 
-**Option A: Free on Render.com (Recommended)**
-1. Push this folder to a GitHub repo
+**Option A: Render.com (Recommended)**
+1. Push this repo to GitHub
 2. Go to [https://render.com](https://render.com) and create a free account
 3. New → Web Service → connect your GitHub repo
 4. Set these environment variables in Render's dashboard:
-   - `ANTHROPIC_API_KEY` = your key
+   - `OPENAI_API_KEY` = your key
    - `TWILIO_ACCOUNT_SID` = from Twilio
    - `TWILIO_AUTH_TOKEN` = from Twilio
-5. Deploy — Render gives you a URL like `https://edubot-eswatini.onrender.com`
+5. Deploy — Render gives you a URL like `https://mamtutor.onrender.com`
 
 **Option B: Run Locally (for testing)**
 ```bash
@@ -59,13 +57,13 @@ npm start
 1. In Twilio Console → Messaging → Sandbox Settings
 2. Set **"When a message comes in"** to:
    ```
-   https://your-render-url.onrender.com/webhook
+   https://mamtutor.onrender.com/webhook
    ```
    (POST method)
 3. Save
 
 ### Step 5 — Test It!
-1. In Twilio Sandbox, join by sending the sandbox join code to the Twilio number via WhatsApp
+1. Join the sandbox by sending the join code to the Twilio number via WhatsApp
 2. Then send: **"Grade 5"** or **"Form 3"**
 3. Ask a question and watch the magic! ✨
 
@@ -92,7 +90,7 @@ Bot:     "Let's go! 🎯 Question 1: What is 1/2 + 1/4?"
 ## 📁 File Structure
 
 ```
-whatsapp-tutor/
+mamtutor/
 ├── src/
 │   ├── server.js      # Express webhook server (main entry)
 │   ├── tutor.js       # AI system prompt builder
@@ -108,11 +106,12 @@ whatsapp-tutor/
 
 | Feature | How |
 |---|---|
-| Persist sessions across restarts | Replace `sessions.js` with Redis |
-| Support images (diagrams) | Add Twilio media handling + Claude vision |
+| Persist sessions across restarts | Replace `sessions.js` with Redis (Upstash free tier) |
+| Support images (diagrams) | Add Twilio media handling + OpenAI vision |
 | Analytics dashboard | Add logging to a database |
 | Production WhatsApp number | Apply for Meta WhatsApp Business API |
-| SMS fallback | Add Twilio SMS endpoint |
+| Rate limiting | Add per-user message limits |
+| Uptime on free tier | Add UptimeRobot ping to `/health` every 5 min |
 
 ---
 
@@ -121,7 +120,7 @@ whatsapp-tutor/
 Once you're ready to go live beyond the sandbox:
 1. Apply at [Meta Business Manager](https://business.facebook.com)
 2. Or use **Twilio's WhatsApp Business Profile** (easiest path)
-3. You'll need: a business name, website, and phone number
+3. You'll need: a business name, website (`mamtutor.com`), and phone number
 4. Approval takes 1–7 days
 
 ---

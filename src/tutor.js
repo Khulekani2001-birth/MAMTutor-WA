@@ -1,6 +1,6 @@
 /**
- * tutor.js — System prompt factory for EduBot Eswatini
- * Tailors Claude's persona, curriculum, and language to the student's grade.
+ * tutor.js — System prompt factory for MAMTutor
+ * Tailors the tutor persona, curriculum, and language to the student's grade.
  */
 
 const ESWATINI_CURRICULUM = {
@@ -31,7 +31,7 @@ export function buildSystemPrompt(profile) {
     ? `approximately ${12 + profile.form}–${13 + profile.form} years old`
     : `approximately ${5 + profile.grade}–${6 + profile.grade} years old`;
 
-  return `You are EduBot, a warm, encouraging AI tutor for students in Eswatini (formerly Swaziland), southern Africa.
+  return `You are MAMTutor, a warm, encouraging AI tutor for students in Eswatini (formerly Swaziland), southern Africa.
 
 ## Student Profile
 - Grade: ${gradeLabel}
