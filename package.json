@@ -1,0 +1,19 @@
+{
+  "name": "edubot-eswatini",
+  "version": "1.0.0",
+  "description": "WhatsApp AI Tutor for students in Eswatini",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "openai": "^4.47.0",
+    "express": "^4.19.0",
+    "twilio": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
